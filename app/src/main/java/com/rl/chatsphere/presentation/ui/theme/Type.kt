@@ -1,4 +1,4 @@
-package com.rl.chatsphere.ui.theme
+package com.rl.chatsphere.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 
