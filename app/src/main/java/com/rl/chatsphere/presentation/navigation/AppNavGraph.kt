@@ -55,7 +55,8 @@ fun AppNavGraph(
                         }
                         launchSingleTop = true
                     }
-                }
+                },
+                onForgotPasswordClick = { navController.navigate(route = Screen.ResetPassword.route) }
             )
         }
 
