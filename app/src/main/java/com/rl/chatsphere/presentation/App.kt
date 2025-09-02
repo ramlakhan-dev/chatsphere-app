@@ -12,21 +12,28 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.rl.chatsphere.R
 import com.rl.chatsphere.presentation.navigation.AppNavGraph
 import com.rl.chatsphere.presentation.navigation.Screen
+import com.rl.chatsphere.presentation.state.AuthState
+import com.rl.chatsphere.presentation.viewmodel.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App() {
+
+    val authViewModel: AuthViewModel = hiltViewModel()
+    val userState by authViewModel.userState.collectAsState()
 
     val navController = rememberNavController()
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
@@ -71,7 +78,7 @@ fun App() {
         AppNavGraph(
             modifier = Modifier.padding(innerPadding),
             navController = navController,
-            isAuthenticated = false
+            isAuthenticated = userState is AuthState.Authenticated
         )
 
     }
