@@ -6,4 +6,6 @@
     <string name="back">Back</string>
     <string name="sign_up">Sign Up</string>
     <string name="welcome_message">Your AI companion for meaningful conversations.</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>
