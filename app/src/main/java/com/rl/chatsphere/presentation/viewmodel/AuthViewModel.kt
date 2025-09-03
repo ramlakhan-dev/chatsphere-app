@@ -11,11 +11,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    authUseCase: AuthUseCase
+    private val authUseCase: AuthUseCase
 ): ViewModel() {
 
     private val _userState = MutableStateFlow<AuthState>(AuthState.Idle)
     val userState: StateFlow<AuthState> = _userState.asStateFlow()
+
+    private val _signOutState = MutableStateFlow<AuthState>(AuthState.Idle)
+    val signOutState: StateFlow<AuthState> = _signOutState.asStateFlow()
 
     init {
         val user = authUseCase.getCurrentUser()
@@ -24,5 +27,10 @@ class AuthViewModel @Inject constructor(
         } else {
             _userState.value = AuthState.Unauthenticated
         }
+    }
+
+    fun signOut() {
+        authUseCase.signOut()
+        _signOutState.value = AuthState.Unauthenticated
     }
 }
